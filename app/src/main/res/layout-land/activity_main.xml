@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
 
     <include
         android:id="@+id/toolbar"
@@ -24,21 +22,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".08" />
+        app:layout_constraintGuide_percent=".1" />
 
     <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#262635"
+        android:textColor="#FFFFFF"
         android:gravity="bottom|end"
         android:textSize="32sp"
-        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -46,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent=".30" />
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout"
@@ -68,11 +66,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="C"
-            android:textColor="#FFFFFF"
             app:layout_column="0"
             app:layout_columnWeight="1"
             app:layout_row="0"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/div"
@@ -80,11 +78,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="/"
-            android:textColor="#FFFFFF"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="0"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/mul"
@@ -92,11 +90,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="X"
-            android:textColor="#FFFFFF"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="0"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/del"
@@ -104,11 +102,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="del"
-            android:textColor="#FFFFFF"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="0"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but7"
@@ -116,11 +114,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="7"
-            android:textColor="#FFFFFF"
             app:layout_column="0"
             app:layout_columnWeight="1"
             app:layout_row="1"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but8"
@@ -128,11 +126,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="8"
-            android:textColor="#FFFFFF"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="1"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but9"
@@ -140,11 +138,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="9"
-            android:textColor="#FFFFFF"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="1"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/sub"
@@ -152,11 +150,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="-"
-            android:textColor="#FFFFFF"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="1"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but4"
@@ -164,11 +162,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="4"
-            android:textColor="#FFFFFF"
             app:layout_column="0"
             app:layout_columnWeight="1"
             app:layout_row="2"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but5"
@@ -176,11 +174,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="5"
-            android:textColor="#FFFFFF"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="2"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but6"
@@ -188,11 +186,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="6"
-            android:textColor="#FFFFFF"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="2"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/add"
@@ -200,11 +198,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="+"
-            android:textColor="#FFFFFF"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="2"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but1"
@@ -212,11 +210,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="1"
-            android:textColor="#FFFFFF"
             app:layout_column="0"
             app:layout_columnWeight="1"
             app:layout_row="3"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but0"
@@ -224,11 +222,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="0"
-            android:textColor="#FFFFFF"
             app:layout_column="0"
             app:layout_columnWeight="1"
             app:layout_row="4"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but2"
@@ -236,11 +234,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="2"
-            android:textColor="#FFFFFF"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="3"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/but3"
@@ -248,11 +246,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="3"
-            android:textColor="#FFFFFF"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="3"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/equals"
@@ -260,13 +258,13 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="="
-            android:textColor="#FFFFFF"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_gravity="fill_vertical"
             app:layout_row="3"
             app:layout_rowSpan="2"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/comma"
@@ -286,11 +284,11 @@
             android:layout_height="wrap_content"
             android:background="#00201F1F"
             android:text="+/-"
-            android:textColor="#FFFFFF"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="4"
-            app:layout_rowWeight="1" />
+            app:layout_rowWeight="1"
+            android:textColor="#FFFFFF"/>
     </androidx.gridlayout.widget.GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

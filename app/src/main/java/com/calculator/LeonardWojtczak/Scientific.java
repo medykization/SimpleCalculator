@@ -1,33 +1,35 @@
 package com.calculator.LeonardWojtczak;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.widget.Toolbar;
-
 import org.mariuszgromada.math.mxparser.Expression;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class Scientific extends AppCompatActivity implements View.OnClickListener {
 
     private TextView result;
     private boolean isResult = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_scientific);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
 
-        this.result = findViewById(R.id.result);
+        this.result = findViewById(R.id.result2);
         initButtonsListeners();
 
         if(savedInstanceState != null) {
@@ -92,6 +94,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.comma:
                 addSpecialSingToResult(".");
                 break;
+            case R.id.sin:
+                addSpecialFunctionToExpression("sin");
+                break;
+            case R.id.cos:
+                addSpecialFunctionToExpression("cos");
+                break;
+            case R.id.tan:
+                addSpecialFunctionToExpression("tan");
+                break;
+            case R.id.ln:
+                addSpecialFunctionToExpression("ln");
+                break;
+            case R.id.log:
+                addSpecialFunctionToExpression("log");
+                break;
+            case R.id.pow:
+                addSpecialSingToResult("^2");
+                break;
+            case R.id.powToY:
+                addSpecialSingToResult("^");
+                break;
+            case R.id.proc:
+                if(!isSameSignOnEnd("%")) this.result.append("%");
+                break;
+            case R.id.sqrt:
+                addSpecialFunctionToExpression("sqrt");
+                break;
             case R.id.equals:
                 calculateTheEquation();
                 break;
@@ -102,33 +131,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.result.setText(null);
                 break;
             case R.id.c:
-                this.result.setText(removeLastCharacter(this.result.getText()));
+                if(this.isResult) {
+                    this.result.setText(null);
+                    this.isResult = false;
+                }
+                else
+                    this.result.setText(removeLastCharacter(this.result.getText()));
                 break;
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.scientific:
-                startActivity(new Intent(this, Scientific.class));
-                return true;
-            case R.id.about:
-                startActivity(new Intent(this, About.class));
-                return true;
-            case R.id.exit:
-                onFinishClick();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -137,7 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void calculateTheEquation() {
-        Expression expression = new Expression(this.result.getText().toString());
+        Expression expression = new Expression(expressionParser());
+
         double result = expression.calculate();
         if(result % 1 == 0)
             this.result.setText(String.valueOf((int)result));
@@ -207,9 +217,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     addOnEnd(sign);
             }
             else
-                if(this.result.getText().length() > 0)
-                    this.result.append(sign);
+            if(this.result.getText().length() > 0)
+                this.result.append(sign);
         }
+    }
+
+    private void addSpecialFunctionToExpression(String function) {
+        if(this.isResult) {
+            this.result.setText(null);
+            this.isResult = false;
+        }
+        this.result.append(function);
+    }
+
+    private String expressionParser() {
+        StringBuilder expression = new StringBuilder();
+        CharSequence charSequence = this.result.getText();
+        int lenght = charSequence.length();
+        boolean isLetter = false;
+        boolean close = true;
+        for(int i = 0; i < lenght; i++){
+            char tmp = charSequence.charAt(i);
+            if(Character.isLetter(tmp) || tmp == '^') {
+                isLetter = true;
+                expression.append(tmp);
+            }
+            else if(Character.isDigit(tmp)) {
+                if(isLetter) {
+                    isLetter = false;
+                    close = false;
+                    if(charSequence.charAt(i - 1) == 'g')
+                        expression.append("10");
+                    expression.append("(");
+                }
+                expression.append(tmp);
+            }
+            else {
+                if(isLetter) {
+                    isLetter = false;
+                    close = false;
+                    expression.append("(");
+                    expression.append(tmp);
+                }
+                else if(!close) {
+                    expression.append(")");
+                    expression.append(tmp);
+                }
+                else {
+                    expression.append(tmp);
+                }
+            }
+        }
+
+        if(!close)
+            expression.append(")");
+
+        return expression.toString();
     }
 
     private void addOnEnd(String sign) {
@@ -230,6 +293,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(text.endsWith("+") || text.endsWith("-") || text.endsWith("*") || text.endsWith("/"))
             return true;
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.standard:
+                startActivity(new Intent(this, MainActivity.class));
+                return true;
+            case R.id.about:
+                startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.exit:
+                onFinishClick();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     protected void onFinishClick() {
@@ -260,6 +347,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button comma = findViewById(R.id.comma);
         Button del = findViewById(R.id.del);
         Button c = findViewById(R.id.c);
+
+        Button sin = findViewById(R.id.sin);
+        Button cos = findViewById(R.id.cos);
+        Button tan = findViewById(R.id.tan);
+        Button ln = findViewById(R.id.ln);
+        Button log = findViewById(R.id.log);
+        Button sqrt = findViewById(R.id.sqrt);
+        Button pow = findViewById(R.id.pow);
+        Button powToY = findViewById(R.id.powToY);
+        Button proc = findViewById(R.id.proc);
+
+        sin.setOnClickListener(this);
+        cos.setOnClickListener(this);
+        tan.setOnClickListener(this);
+        ln.setOnClickListener(this);
+        log.setOnClickListener(this);
+        sqrt.setOnClickListener(this);
+        pow.setOnClickListener(this);
+        powToY.setOnClickListener(this);
+        proc.setOnClickListener(this);
 
         but0.setOnClickListener(this);
         but1.setOnClickListener(this);
